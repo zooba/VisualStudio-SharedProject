@@ -12,49 +12,34 @@
  *
  * ***************************************************************************/
 
-using System;
-using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
 using System.Runtime.InteropServices;
+using Microsoft.VisualStudioTools.Project.Automation;
+using VSLangProj;
 
-namespace Microsoft.VisualStudioTools.Project.Automation
-{
-    /// <summary>
-    /// Contains OAReferenceItem objects 
-    /// </summary>
+namespace Microsoft.PythonTools.Project.Automation {
     [SuppressMessage("Microsoft.Interoperability", "CA1405:ComVisibleTypeBaseTypesShouldBeComVisible")]
-    [ComVisible(true), CLSCompliant(false)]
-    public class OAReferenceFolderItem : OAProjectItem
-    {
-        #region ctors
-        internal OAReferenceFolderItem(OAProject project, ReferenceContainerNode node)
-            : base(project, node)
-        {
+    [ComVisible(true)]
+    public class OAWebPiReference : OAReferenceBase {
+        internal OAWebPiReference(WebPiReferenceNode webPiReferenceNode) :
+            base(webPiReferenceNode) {
         }
-
-        #endregion
-
-        private new ReferenceContainerNode Node 
-        {
-            get 
-            {
-                return (ReferenceContainerNode)base.Node;
+        
+        
+        #region Reference override
+       
+        public override string Name {
+            get {
+                return System.IO.Path.GetFileNameWithoutExtension(BaseReferenceNode.Url);
             }
         }
 
-        #region overridden methods
-        /// <summary>
-        /// Returns the project items collection of all the references defined for this project.
-        /// </summary>
-        public override EnvDTE.ProjectItems ProjectItems
-        {
-            get
-            {
-                return new OANavigableProjectItems(this.Project, this.Node);
+        public override prjReferenceType Type {
+            get {
+                return prjReferenceType.prjReferenceTypeAssembly;
             }
         }
-
-
         #endregion
     }
 }
