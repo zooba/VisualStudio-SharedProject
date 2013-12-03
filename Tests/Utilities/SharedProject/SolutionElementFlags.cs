@@ -12,19 +12,13 @@
  *
  * ***************************************************************************/
 
-using System.ComponentModel.Composition;
-using Microsoft.VisualStudio.Utilities;
+using System;
 
-#if NTVS_FEATURE_INTERACTIVEWINDOW
-namespace Microsoft.NodejsTools.Repl {
-#else
-namespace Microsoft.VisualStudio.Repl {
-#endif
-    /// <summary>
-    /// Provides the content type for our REPL error buffer.
-    /// </summary>
-    class ReplOutputContentType {
-        [Export, Name(ReplConstants.ReplOutputContentTypeName), BaseDefinition("text")]
-        internal static ContentTypeDefinition ContentTypeDefinition = null;
+namespace TestUtilities.SharedProject {
+    [Flags]
+    public enum SolutionElementFlags {
+        None,
+        ExcludeFromSolution = 0x01,
+        ExcludeFromConfiguration = 0x02
     }
 }

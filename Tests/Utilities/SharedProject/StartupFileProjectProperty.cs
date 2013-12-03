@@ -12,19 +12,19 @@
  *
  * ***************************************************************************/
 
-using System.ComponentModel.Composition;
-using Microsoft.VisualStudio.Utilities;
-
-#if NTVS_FEATURE_INTERACTIVEWINDOW
-namespace Microsoft.NodejsTools.Repl {
-#else
-namespace Microsoft.VisualStudio.Repl {
-#endif
+namespace TestUtilities.SharedProject {
     /// <summary>
-    /// Provides the content type for our REPL error buffer.
+    /// Represents a project property for the startup file in a script
+    /// based project system.  When generated the code extension is automatically
+    /// appended.
     /// </summary>
-    class ReplOutputContentType {
-        [Export, Name(ReplConstants.ReplOutputContentTypeName), BaseDefinition("text")]
-        internal static ContentTypeDefinition ContentTypeDefinition = null;
+    public sealed class StartupFileProjectProperty : ProjectProperty {
+        public StartupFileProjectProperty(string filename)
+            : base("StartupFile", filename) {
+        }
+
+        public override void Generate(ProjectType projectType, Microsoft.Build.Evaluation.Project project) {
+            project.SetProperty(Name, Value + projectType.CodeExtension);
+        }
     }
 }
