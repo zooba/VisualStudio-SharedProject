@@ -678,7 +678,7 @@ namespace Microsoft.VisualStudioTools.Project {
         /// Immediately stops the process.
         /// </summary>
         public void Kill() {
-            if (_process != null) {
+            if (_process != null && !_process.HasExited) {
                 _process.Kill();
                 // Should have already been called, in which case this is a no-op
                 OnExited(this, EventArgs.Empty);
