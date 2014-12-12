@@ -12,17 +12,19 @@
  *
  * ***************************************************************************/
 
-using Microsoft.VisualStudio;
-using TestUtilities;
-using TestUtilities.SharedProject;
 
-namespace Microsoft.VisualStudioTools.MockVsTests {
-    public static class MockVsTestExtensions {
-        public static IVisualStudioInstance ToMockVs(this SolutionFile self) {
-            MockVs vs = new MockVs();
-            ErrorHandler.ThrowOnFailure(vs.Solution.OpenSolutionFile(0, self.Filename));
-            return vs;
-        }
+namespace TestUtilities {
+    // http://msdn.microsoft.com/en-us/library/ms645505(VS.85).aspx
+    public enum MessageBoxButton {
+        Abort = 3,
+        Cancel = 2,
+        Continue = 11,
+        Ignore = 5,
+        No = 7,
+        Ok = 1,
+        Retry = 4,
+        TryAgain = 10,
+        Yes = 6
 
     }
 }

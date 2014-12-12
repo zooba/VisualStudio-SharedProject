@@ -12,17 +12,14 @@
  *
  * ***************************************************************************/
 
-using Microsoft.VisualStudio;
-using TestUtilities;
-using TestUtilities.SharedProject;
 
-namespace Microsoft.VisualStudioTools.MockVsTests {
-    public static class MockVsTestExtensions {
-        public static IVisualStudioInstance ToMockVs(this SolutionFile self) {
-            MockVs vs = new MockVs();
-            ErrorHandler.ThrowOnFailure(vs.Solution.OpenSolutionFile(0, self.Filename));
-            return vs;
-        }
+using System.Windows.Input;
+namespace TestUtilities {
+    public interface ITreeNode {
+        void Select();
+        void AddToSelection();
 
+        void DragOntoThis(params ITreeNode[] source);
+        void DragOntoThis(Key modifier, params ITreeNode[] source);
     }
 }

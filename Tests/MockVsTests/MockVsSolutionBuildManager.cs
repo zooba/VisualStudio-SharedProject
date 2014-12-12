@@ -17,69 +17,77 @@ using Microsoft.VisualStudio;
 using Microsoft.VisualStudio.Shell.Interop;
 
 namespace Microsoft.VisualStudioTools.MockVsTests {
-    class MockVsDebugger : IVsDebugger {
-        public int AdviseDebugEventCallback(object punkDebuggerEvents) {
+    class MockVsSolutionBuildManager : IVsSolutionBuildManager {
+        public int AdviseUpdateSolutionEvents(IVsUpdateSolutionEvents pIVsUpdateSolutionEvents, out uint pdwCookie) {
             throw new NotImplementedException();
         }
 
-        public int AdviseDebuggerEvents(IVsDebuggerEvents pSink, out uint pdwCookie) {
+        public int CanCancelUpdateSolutionConfiguration(out int pfCanCancel) {
             throw new NotImplementedException();
         }
 
-        public int AllowEditsWhileDebugging(ref Guid guidLanguageService) {
+        public int CancelUpdateSolutionConfiguration() {
             throw new NotImplementedException();
         }
 
-        public int ExecCmdForTextPos(VsTextPos[] pTextPos, ref Guid pguidCmdGroup, uint nCmdID, uint nCmdexecopt, IntPtr pvaIn, IntPtr pvaOut) {
+        public int DebugLaunch(uint grfLaunch) {
             throw new NotImplementedException();
         }
 
-        public int GetDataTipValue(VisualStudio.TextManager.Interop.IVsTextLines pTextBuf, VisualStudio.TextManager.Interop.TextSpan[] pTS, string pszExpression, out string pbstrValue) {
+        public int FindActiveProjectCfg(IntPtr pvReserved1, IntPtr pvReserved2, IVsHierarchy pIVsHierarchy_RequestedProject, IVsProjectCfg[] ppIVsProjectCfg_Active = null) {
             throw new NotImplementedException();
         }
 
-        public int GetENCUpdate(out object ppUpdate) {
+        public int GetProjectDependencies(IVsHierarchy pHier, uint celt, IVsHierarchy[] rgpHier, uint[] pcActual = null) {
             throw new NotImplementedException();
         }
 
-        public int GetMode(DBGMODE[] pdbgmode) {
-            pdbgmode[0] = DBGMODE.DBGMODE_Design;
+        public int QueryBuildManagerBusy(out int pfBuildManagerBusy) {
+            pfBuildManagerBusy = 0;
             return VSConstants.S_OK;
         }
 
-        public int InsertBreakpointByName(ref Guid guidLanguage, string pszCodeLocationText) {
+        public int QueryDebugLaunch(uint grfLaunch, out int pfCanLaunch) {
             throw new NotImplementedException();
         }
 
-        public int IsBreakpointOnName(ref Guid guidLanguage, string pszCodeLocationText, out int pfIsBreakpoint) {
+        public int StartSimpleUpdateProjectConfiguration(IVsHierarchy pIVsHierarchyToBuild, IVsHierarchy pIVsHierarchyDependent, string pszDependentConfigurationCanonicalName, uint dwFlags, uint dwDefQueryResults, int fSuppressUI) {
             throw new NotImplementedException();
         }
 
-        public int LaunchDebugTargets(uint cTargets, IntPtr rgDebugTargetInfo) {
+        public int StartSimpleUpdateSolutionConfiguration(uint dwFlags, uint dwDefQueryResults, int fSuppressUI) {
             throw new NotImplementedException();
         }
 
-        public int ParseFileRedirection(string pszArgs, out string pbstrArgsProcessed, out IntPtr phStdInput, out IntPtr phStdOutput, out IntPtr phStdError) {
+        public int UnadviseUpdateSolutionEvents(uint dwCookie) {
             throw new NotImplementedException();
         }
 
-        public int QueryStatusForTextPos(VsTextPos[] pTextPos, ref Guid pguidCmdGroup, uint cCmds, VisualStudio.OLE.Interop.OLECMD[] prgCmds, IntPtr pCmdText) {
+        public int UpdateSolutionConfigurationIsActive(out int pfIsActive) {
             throw new NotImplementedException();
         }
 
-        public int RemoveBreakpointsByName(ref Guid guidLanguage, string pszCodeLocationText) {
+        public int get_CodePage(out uint puiCodePage) {
             throw new NotImplementedException();
         }
 
-        public int ToggleBreakpointByName(ref Guid guidLanguage, string pszCodeLocationText) {
+        public int get_IsDebug(out int pfIsDebug) {
             throw new NotImplementedException();
         }
 
-        public int UnadviseDebugEventCallback(object punkDebuggerEvents) {
+        public int get_StartupProject(out IVsHierarchy ppHierarchy) {
             throw new NotImplementedException();
         }
 
-        public int UnadviseDebuggerEvents(uint dwCookie) {
+        public int put_CodePage(uint uiCodePage) {
+            throw new NotImplementedException();
+        }
+
+        public int put_IsDebug(int fIsDebug) {
+            throw new NotImplementedException();
+        }
+
+        public int set_StartupProject(IVsHierarchy pHierarchy) {
             throw new NotImplementedException();
         }
     }

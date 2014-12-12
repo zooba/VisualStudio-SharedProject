@@ -12,17 +12,18 @@
  *
  * ***************************************************************************/
 
-using Microsoft.VisualStudio;
-using TestUtilities;
-using TestUtilities.SharedProject;
+using System;
 
-namespace Microsoft.VisualStudioTools.MockVsTests {
-    public static class MockVsTestExtensions {
-        public static IVisualStudioInstance ToMockVs(this SolutionFile self) {
-            MockVs vs = new MockVs();
-            ErrorHandler.ThrowOnFailure(vs.Solution.OpenSolutionFile(0, self.Filename));
-            return vs;
-        }
+namespace TestUtilities {
+    public interface IOverwriteFile : IDisposable {
+        string Text { get; }
 
+        void No();
+
+        bool AllItems { get; set; }
+
+        void Yes();
+
+        void Cancel();
     }
 }

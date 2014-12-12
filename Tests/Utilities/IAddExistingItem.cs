@@ -12,17 +12,16 @@
  *
  * ***************************************************************************/
 
-using Microsoft.VisualStudio;
-using TestUtilities;
-using TestUtilities.SharedProject;
+using System;
 
-namespace Microsoft.VisualStudioTools.MockVsTests {
-    public static class MockVsTestExtensions {
-        public static IVisualStudioInstance ToMockVs(this SolutionFile self) {
-            MockVs vs = new MockVs();
-            ErrorHandler.ThrowOnFailure(vs.Solution.OpenSolutionFile(0, self.Filename));
-            return vs;
+namespace TestUtilities {
+    public interface IAddExistingItem : IDisposable {
+        void OK();
+        void Add();
+        void AddLink();
+        string FileName {
+            get;
+            set;
         }
-
     }
 }

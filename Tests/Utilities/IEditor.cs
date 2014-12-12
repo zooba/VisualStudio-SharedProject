@@ -12,17 +12,30 @@
  *
  * ***************************************************************************/
 
-using Microsoft.VisualStudio;
-using TestUtilities;
-using TestUtilities.SharedProject;
+using System;
+using Microsoft.VisualStudio.Language.Intellisense;
+using Microsoft.VisualStudio.Text.Editor;
 
-namespace Microsoft.VisualStudioTools.MockVsTests {
-    public static class MockVsTestExtensions {
-        public static IVisualStudioInstance ToMockVs(this SolutionFile self) {
-            MockVs vs = new MockVs();
-            ErrorHandler.ThrowOnFailure(vs.Solution.OpenSolutionFile(0, self.Filename));
-            return vs;
+namespace TestUtilities {
+    public interface IEditor {
+        IIntellisenseSession TopSession {
+            get;
+        }
+        string Text {
+            get;
+        }
+        void Type(string text);
+
+        void Invoke(Action action);
+
+        void MoveCaret(int line, int column);
+        void SetFocus();
+
+        IWpfTextView TextView {
+            get;
         }
 
+        void WaitForText(string text);
+        void Select(int line, int column, int length);
     }
 }
