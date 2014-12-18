@@ -28,7 +28,7 @@ namespace Microsoft.VisualStudio.Repl {
 
             if (string.IsNullOrWhiteSpace(arguments)) {
                 var curValue = (bool)window.GetOptionValue(ReplOptions.ShowOutput);
-                window.WriteLine("ECHO is " + curValue);
+                window.WriteLine("ECHO is " + (curValue ? "ON" : "OFF"));
                 return ExecutionResult.Succeeded;
             }
 
