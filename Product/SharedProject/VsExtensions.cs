@@ -12,7 +12,6 @@
  *
  * ***************************************************************************/
 
-
 using System;
 using System.Diagnostics;
 using System.Threading.Tasks;
@@ -155,5 +154,20 @@ namespace Microsoft.VisualStudioTools {
         }
 
         #endregion
+
+        /// <summary>
+        /// Use the line ending of the first line for the line endings.  
+        /// If we have no line endings (single line file) just use Environment.NewLine
+        /// </summary>
+        public static string GetNewLineText(ITextSnapshot snapshot) {
+            // https://nodejstools.codeplex.com/workitem/1670 : override the GetNewLineCharacter as VS always returns '\r\n'
+            // check on each format as the user could have changed line endings (manually or through advanced save options) since
+            // the file was opened.
+            if (snapshot.LineCount > 0 && snapshot.GetLineFromPosition(0).LineBreakLength > 0) {
+                return snapshot.GetLineFromPosition(0).GetLineBreakText();
+            } else {
+                return Environment.NewLine;
+            }
+        }
     }
 }
