@@ -38,7 +38,7 @@ namespace Microsoft.VisualStudioTools.MockVsTests {
         }
 
         public int GetEditorCaption(READONLYSTATUS dwReadOnly, out string pbstrEditorCaption) {
-            throw new NotImplementedException();
+            return GetPrimaryView(out ppView);
         }
 
         public int GetLastActiveView(out IVsTextView ppView) {
